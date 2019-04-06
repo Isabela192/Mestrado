@@ -1,0 +1,62 @@
+altitude: <ndarray of type: float64 and shape: (1,)>
+altitude_agl: None
+antenna_transition: None
+azimuth: <ndarray of type: float32 and shape: (3607,)>
+elevation: <ndarray of type: float32 and shape: (3607,)>
+fields:
+	corrected_reflectivity: <ndarray of type: float32 and shape: (3607, 500)>
+	reflectivity: <ndarray of type: float32 and shape: (3607, 500)>
+	corrected_velocity: <ndarray of type: float32 and shape: (3607, 500)>
+	spectrum_width: <ndarray of type: float32 and shape: (3607, 500)>
+fixed_angle: <ndarray of type: float32 and shape: (10,)>
+instrument_parameters:
+	frequency: <ndarray of type: float32 and shape: (1,)>
+	radar_beam_width_h: <ndarray of type: float32 and shape: (1,)>
+	radar_beam_width_v: <ndarray of type: float32 and shape: (1,)>
+	pulse_width: <ndarray of type: float32 and shape: (3607,)>
+	prt: <ndarray of type: float32 and shape: (3607,)>
+	prt_mode: <ndarray of type: <U9 and shape: (10,)>
+	prt_ratio: <ndarray of type: float32 and shape: (3607,)>
+	unambiguous_range: <ndarray of type: float32 and shape: (3607,)>
+	nyquist_velocity: <ndarray of type: float32 and shape: (3607,)>
+	n_samples: <ndarray of type: int32 and shape: (3607,)>
+latitude: <ndarray of type: float64 and shape: (1,)>
+longitude: <ndarray of type: float64 and shape: (1,)>
+nsweeps: 10
+ngates: 500
+nrays: 3607
+radar_calibration: None
+range: <ndarray of type: float32 and shape: (500,)>
+scan_rate: <ndarray of type: float32 and shape: (3607,)>
+scan_type: ppi
+sweep_end_ray_index: <ndarray of type: int32 and shape: (10,)>
+sweep_mode: <ndarray of type: <U20 and shape: (10,)>
+sweep_number: <ndarray of type: int32 and shape: (10,)>
+sweep_start_ray_index: <ndarray of type: int32 and shape: (10,)>
+target_scan_rate: <ndarray of type: float32 and shape: (10,)>
+time: <ndarray of type: float64 and shape: (3607,)>
+metadata:
+	Conventions: CF/Radial instrument_parameters
+	version: 1.3
+	title: 
+	institution: 
+	references: 
+	source: 
+	history: 
+	comment: 
+	instrument_name: 
+	original_container: GAMIC-HDF5
+	gamic_version: b'8'
+	sets_scheduled: b'15'
+	gamic_object: b'PVOL'
+	gamic_date: b'2017-02-02T12:10:24.000Z'
+	software: b'FROG'
+	template_name: b'250km_15elev_600hz'
+	site_name: b'SaoRoque'
+	host_name: b'srofrog'
+	azimuth_beam: 2.0
+	elevation_beam: 2.0
+	sdp_name: b'UNKNOWN SDP'
+	sw_version: b'generic-1000:frog-iacit:042913:150040'
+	sdp_version: b'HW protocol: 2.1.0; PCI DSP firmware: 5.0.5; PCI FPGA firmware: 5.0.1; IFD FPGA firmware: 5.0.4; ENIGMA software: 1.1.11'
+	simulated: b'off'

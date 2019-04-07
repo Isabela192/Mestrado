@@ -13,24 +13,31 @@ plt.rcParams['savefig.dpi'] = 150
 
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 from cartopy.feature import NaturalEarthFeature, LAND, COASTLINE
-
-era_data = '/media/isabela/YOSHI_2/Analises/dados/ERA5/02_02.nc'
-ds = xr.open_dataset(era_data)
-lats = ds['latitude']
-lons = ds['longitude']
+caso = '_caso_31'
+era_data = '/home/isabela/Documentos/Mestrado/Analises/Mestrado/ERA5/31_01.nc'
+sg_level_data = '/home/isabela/Documentos/Mestrado/Analises/Mestrado/ERA5/single31_01.nc'
+ps = xr.open_dataset(era_data)
+sgl = xr.open_dataset(sg_level_data)
+lats = ps['latitude']
+lons = ps['longitude']
 #print(ds)
 #LOOPING!
-for t in range(0,1):
-    time = ds['time'][t]
+for t in range(0,8):
+    time = ps['time'][t]
     tempo = np.datetime_as_string(time, unit='m', timezone = 'UTC')
-    rh = ds['r'][t][1][:][:]
-    wind_u = ds['u'][t][1][:][:]
-    wind_v = ds['v'][t][1][:][:]    
-    temp = ds['t'][t][1][:][:]
-    hgt_500 = ds['z'][t][0][:][:]
-    hgt_1000 = ds['z'][t][2][:][:]
-
+    rh = ps['r'][t][1][:][:]
+    wind_u = ps['u'][t][1][:][:]
+    wind_v = ps['v'][t][1][:][:]    
+    
+    t2m = sgl['t2m'][t][:][:]
+    t2m = t2m - 273.15
+    
+    prnm = sgl['msl'][t][:][:]
+    prnm = prnm/100
+    hgt_500 = ps['z'][t][0][:][:]
+    hgt_1000 = ps['z'][t][2][:][:]
     thk = (hgt_500-hgt_1000)/10
+    
     #Creating the figure plot area:
     def brazil_states(projection = ccrs.PlateCarree()):
         fig, ax = plt.subplots(figsize=(9,5), subplot_kw=dict(projection=projection))
@@ -56,8 +63,8 @@ for t in range(0,1):
     
     fig.canvas.draw()
     plt.tight_layout()
-    save_fig = np.array2string(tempo)
-    #plt.savefig('/media/isabela/YOSHI_2/Analises/Imagens/UR_vento_0' + str(t) + '.png', transparent = True)
+    ## save_fig = np.array2string(tempo)
+    plt.savefig('/home/isabela/Documentos/Mestrado/Analises/Mestrado/Imagens_ERA/UR_vento_0' + str(t) + caso + '.png', transparent = True)
 
 
     plt.clf()
@@ -65,10 +72,23 @@ for t in range(0,1):
     fig, ax = brazil_states()
     states = NaturalEarthFeature(category='cultural', scale='50m', facecolor='none',name='admin_1_states_provinces_shp', linewidth = 0.4)
     states = ax.add_feature(states, edgecolor='black')
-
-    img_plot = plt.contourf
     
-    plt.show()
+    plt.title('{} \n Temperatura a 2 metros (°C) e PRNM (hPa)'.format(tempo), fontsize=14)
+
+    img_plot = plt.contourf(lons, lats, t2m, levels=np.arange(12,40,2), cmap='hot_r')
+    plt.colorbar(img_plot)
+    img_plot = plt.contour(lons, lats, prnm, levels=np.arange(prnm.min(), prnm.max(), 2), colors='black')
+    plt.clabel(img_plot, inline = 1, fontsize=10, use_clabeltext=True)
+
+    fig.canvas.draw()
+    plt.tight_layout()
+
+    plt.savefig('/home/isabela/Documentos/Mestrado/Analises/Mestrado/Imagens_ERA/T2m_press_0' + str(t) + caso + '.png', transparent = True)
+
+
+    
+
+   
 
 
 
@@ -77,11 +97,6 @@ for t in range(0,1):
 
 
 
-
-
-
-temp_c = temp-273.15
-press_hPa = press_Pa/100
 
 
 

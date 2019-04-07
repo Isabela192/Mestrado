@@ -13,9 +13,9 @@ plt.rcParams['savefig.dpi'] = 150
 
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 from cartopy.feature import NaturalEarthFeature, LAND, COASTLINE
-caso = '_caso_31'
-era_data = '/home/isabela/Documentos/Mestrado/Analises/Mestrado/ERA5/31_01.nc'
-sg_level_data = '/home/isabela/Documentos/Mestrado/Analises/Mestrado/ERA5/single31_01.nc'
+caso = '_caso_02'
+era_data = '/home/isabela/Documentos/Mestrado/Analises/Mestrado/ERA5/02_02.nc'
+sg_level_data = '/home/isabela/Documentos/Mestrado/Analises/Mestrado/ERA5/single02_02.nc'
 ps = xr.open_dataset(era_data)
 sgl = xr.open_dataset(sg_level_data)
 lats = ps['latitude']

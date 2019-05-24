@@ -19,18 +19,43 @@ from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 from cartopy.feature import NaturalEarthFeature, LAND, COASTLINE
 
 #########################Change HERE:#####################################
-caso = '_caso_02'
+caso = '_caso_31'
 era_data = '/home/isabela/Mestrado/MiniProjects/ERA5/ps_levels_02-02.nc'
 sg_level_data = '/home/isabela/Mestrado/MiniProjects/ERA5/single02_02.nc'
 ##########################################################################
 
 ps = xr.open_dataset(era_data)
 sgl = xr.open_dataset(sg_level_data)
-# print(ps)
+
+def brazil_states(projection = ccrs.PlateCarree()):
+    fig, ax = plt.subplots(figsize=(9,5), subplot_kw=dict(projection=projection))
+    ax.set_extent([-90,-30,-45,5])
+    ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth = 0.5)
+    ax.add_feature(cfeature.STATES, linewidth =0.5)
+    ax.add_feature(cfeature.BORDERS, linewidth=0.5)
+    img_plot=ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True, linewidth=0.5, color='gray', linestyle='--')    
+    img_plot.xlabels_top = img_plot.ylabels_right = False
+    img_plot.xformatter=LONGITUDE_FORMATTER
+    img_plot.yformatter=LATITUDE_FORMATTER
+    return fig, ax
+projection = ccrs.PlateCarree()
+fig, ax = brazil_states()
+
+states = NaturalEarthFeature(category='cultural', scale='50m', facecolor='none',name='admin_1_states_provinces_shp', linewidth = 0.4)
+states = ax.add_feature(states, edgecolor='black')
+
+u = ps['u'][1][1][:][:]
+v = ps['v'][1][1][:][:]
+ur = ps['r'][1][1][:][:]
+
+div_u = np.gradient(ur)
+
+print(len(div_u))
 # print(sgl)
 lats = ps['latitude']
 lons = ps['longitude']
-
+plt.contourf(lons, lats, div_u)
+plt.show()
 #LOOPING!
 for t in range(0,5):
     time = ps['time'][t]

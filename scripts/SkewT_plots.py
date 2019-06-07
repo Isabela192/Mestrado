@@ -14,7 +14,7 @@ from matplotlib import rcParams
 
 #Pegando os dados do Wyoming com o Siphon:
 
-date = datetime.datetime(2017, 2, 24, 12)
+date = datetime.datetime(2017, 1, 31, 12)
 station = 'SBMT' #código do Campo de Marte
 sounding = WyomingUpperAir.request_data(date, station)
 #Aumentando a qualidade da iamgem
@@ -58,7 +58,7 @@ skew.plot_dry_adiabats()
 skew.plot_moist_adiabats()
 skew.plot_mixing_lines()
 
-date = date.strftime('%d-%m-%Y %H:%M')
+date = date.strftime('%Y-%m-%d %H:%M')
 
 plt.suptitle('Sondagem ' + date, fontsize = 16, y=0.91)
 plt.savefig('/home/isabela/Mestrado/MiniProjects/Sondagens/sondagem_' + date + '.png' , format = 'png')

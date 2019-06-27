@@ -28,10 +28,7 @@ lons = ps['longitude']
 for t in range(0, len(ps['time'])):
     time = ps['time'][t]
     tempo = np.datetime_as_string(time, unit='m', timezone = 'UTC')
-
-
-    
-       
+         
     hgt_500 = ps['z'][t][0][:][:]
     hgt_1000 = ps['z'][t][2][:][:]
     thk = (hgt_500-hgt_1000)/10

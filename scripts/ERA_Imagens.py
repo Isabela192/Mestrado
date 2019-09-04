@@ -16,8 +16,8 @@ from cartopy.feature import NaturalEarthFeature, LAND, COASTLINE
 plt.rcParams['savefig.dpi'] = 150
 
 #########################Change HERE:#####################################
-era_data = '/p1-mega/isabela/ERA5/reanalysis-era5-pressure-levels_feb.nc'
-sg_level_data = '/p1-mega/isabela/ERA5/reanalysis-era5-single-levels_feb.nc'
+era_data = '/p1-mega/isabela/ERA5/reanalysis-era5-pressure-levels_jan.nc'
+sg_level_data = '/p1-mega/isabela/ERA5/reanalysis-era5-single-levels_jan.nc'
 ##########################################################################
 
 ps = xr.open_dataset(era_data)

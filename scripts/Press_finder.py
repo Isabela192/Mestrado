@@ -10,6 +10,7 @@ import cartopy as crs
 import matplotlib as mpl
 import metpy.calc as mpcalc
 import scipy.ndimage
+
 from matplotlib import rcParams
 from wrf import smooth2d
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
@@ -57,19 +58,23 @@ hgt_500 = ps['z'][0][0][:][:]
 hgt_1000 = ps['z'][0][2][:][:]
 thk = (hgt_500-hgt_1000)/10
 
-plt.title('{} \n PRNM (hPa) e Temperatura em 850 hPa'.format(tempo), fontsize=14)
+plt.title('{} \n PRNM (hPa), Temperatura em 850 hPa  e \n Espessura de Geopotencial (m)'.format(tempo), fontsize=14)
     
-img_plot = plt.contourf(lons, lats, t_850, transform=projection, cmap = 'coolwarm', levels=np.arange(-35,35,5))
+img_plot = plt.contourf(lons, lats, t_850, transform=projection, cmap = 'coolwarm', levels=np.arange(-10,35,5))
 plt.colorbar(img_plot)
+
+
 img_plot = plt.contour(lons, lats, smooth_press, colors = 'black',
                         transform=projection, levels=np.arange(smooth_press.min(), smooth_press.max(),4))
-marker = [(-42,-30),(-42.5,-29)] #usar coordenadas geográficas
-plt.clabel(img_plot, fmt='%1.f', inline=True)
-img_plot = plt.contour(lons, lats, thk, levels = np.arange(thk.min(), thk.max(), 50),
-                    transform = projection, linestyles = 'dashed', colors='red')
+marker = [(-64,-42),(-50,-42),(-48,-30),(-42,-30),(-42.5,-29),(-37, -42), (-35, -42)] #usar coordenadas geográficas
+plt.clabel(img_plot, fmt='%1.f', inline=True, manual = marker, rightside_up= True)
+
+
+img_plot = plt.contour(lons, lats, thk, levels = np.arange(thk.min(), thk.max(), 20),
+                    transform = projection, linestyles = 'dashed', colors='Purple')
 
 
 fig.canvas.draw()
 plt.tight_layout()
-#plt.savefig('/home/isabela/Weather_Data_Science/ERA5/Imagens/Temp_press' + tempo + '.png')
+plt.savefig('/home/isabela/Weather_Data_Science/ERA5/Imagens/Temp_press' + tempo + '.png')
 plt.show()

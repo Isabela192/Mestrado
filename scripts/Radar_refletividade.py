@@ -13,13 +13,12 @@ from datetime import datetime
 
 plt.rcParams.update({'figure.max_open_warning': 0})
 plt.rcParams.update({'font.size':15})
-
 campinas_lat = -22.9
 campinas_lon = -47.06
 sp_lat = -23.55
 sp_lon = -46.65
 date = "2017-02-22"
-shape = "/home/isabela/Mestrado/MiniProjects/scripts/shapefiles/sp_municipios/35MUE250GC_SIR.shp"
+shape = "/home/isabela/Weather_Data_Science/scripts/shapefiles/sp_municipios/35MUE250GC_SIR.shp"
 radar = os.listdir('/p1-mega/isabela/radar/SAOROQUE/' + date)
 
 for f in radar:
